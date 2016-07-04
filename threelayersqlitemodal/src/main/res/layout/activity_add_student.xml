@@ -13,25 +13,25 @@
         android:textSize="22sp" />
 
     <EditText
-        android:id="@+id/et_name"
+        android:id="@+id/et_add_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入姓名" />
 
     <EditText
-        android:id="@+id/et_address"
+        android:id="@+id/et_add_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入地址" />
 
     <EditText
-        android:id="@+id/et_money"
+        android:id="@+id/et_add_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入存款" />
 
     <EditText
-        android:id="@+id/et_age"
+        android:id="@+id/et_add_age"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入年龄" />

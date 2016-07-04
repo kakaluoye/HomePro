@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lin.animat.FrameAnimationActivity">
+
+
+    <ImageView
+        android:id="@+id/fram_animation_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/frame" />
+
+    <Button
+        android:id="@+id/fram_animation_btn1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始播放" />
+
+    <Button
+        android:id="@+id/fram_animation_btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="停止播放" />
+</LinearLayout>

@@ -13,16 +13,15 @@ public class StudentSqliteOpenHelper extends SQLiteOpenHelper {
 
     public StudentSqliteOpenHelper(Context context) {
         super(context, "student.db", null, 1);
+        Log.i("aaa","Helper构造方法执行了");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.i("aaa","Helper_onCreate执行了");
         //创建表
-        db.execSQL("create table if not exists student (stuNo integer primary key" +
-                "stuName varchar(20)," +
-                "address varchar(50)," +
-                "money double," +
-                "age int)");
+        db.execSQL("create table if not exists student (stuNo integer primary key," +
+                "stuName varchar(20),address varchar(50),money double,age int)");
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小黑", "郑州二七", 10000, 20});
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小白", "郑州金水区", 1000, 22});
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"老张", "北京", 20000, 23});
@@ -33,7 +32,7 @@ public class StudentSqliteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小红", "深圳", 50000, 20});
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小黑2", "郑州二七", 10000, 20});
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小白2", "郑州金水区", 1000, 22});
-        db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"老张2", "北京", 20000, 23});
+        db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"老晕2", "北京", 20000, 23});
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"老王2", "郑州二七", 100000, 25});
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小黄2", "郑州高新区", 10000, 20});
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小亮2", "东莞", 30000, 20});
@@ -56,6 +55,8 @@ public class StudentSqliteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小明4", "上海", 40000, 20});
         db.execSQL("insert into student(stuName,address,money,age) values(?,?,?,?)", new Object[]{"小红4", "深圳", 50000, 20});
         Log.i("aaa", "Helper_Create执行OK了");
+
+        //
     }
 
     @Override

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_id"
+            android:id="@+id/tv_item_stuNo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -17,7 +17,7 @@
             android:textColor="#ff0000" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -30,21 +30,21 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_address"
+            android:id="@+id/tv_item_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="地址" />
 
         <TextView
-            android:id="@+id/tv_money"
+            android:id="@+id/tv_item_money"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="存款" />
 
         <TextView
-            android:id="@+id/tv_age"
+            android:id="@+id/tv_item_age"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -12,6 +12,12 @@
         android:onClick="btn_addStudent"
         android:text="添加学生" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btn_tranfermoney"
+        android:text="转账" />
+
     <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"

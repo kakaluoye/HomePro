@@ -20,8 +20,8 @@ public class StudentService {
     private StudentDao studentDao;
 
     public StudentService(Context context) {
-        Log.i("aaa", "StudentService执行了");
         studentDao = new StudentDao(context);
+        Log.i("aaa", "StudentService执行了");
     }
 
     /**
@@ -65,7 +65,11 @@ public class StudentService {
     }
 
     public List<Student> getAllStudentListBypage(int pageSize, int pageindex) {
-        Log.i("aaa","getAllStudentListBypage执行了");
+        Log.i("aaa", "getAllStudentListBypage执行了");
         return studentDao.getAllStudentListByPage(pageSize, pageindex);
+    }
+
+    public boolean studentTranferMoney(int fromstuNo, int tostuNo, double money) {
+        return studentDao.studenTranferMoney(fromstuNo, tostuNo, money);
     }
 }

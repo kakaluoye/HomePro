@@ -4,8 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import com.lin.threelayersqlitemodal.commom.StudentSqliteOpenHelper;
 import com.lin.threelayersqlitemodal.models.Student;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,7 @@ public class StudentDao {
 
     public StudentDao(Context context) {
         helper = new StudentSqliteOpenHelper(context);
+        Log.i("aaa", "StudentDao构造方法执行了");
     }
 
     public boolean insert(Student student) {
@@ -191,7 +194,7 @@ public class StudentDao {
     }
 
     public List<Student> getAllStudentListByPage(int pageSize, int pageindex) {
-        Log.i("aaa","DAO_getAllStudentListByPage执行了");
+        Log.i("aaa", "DAO_getAllStudentListByPage执行了");
         List<Student> data = null;
         SQLiteDatabase db = null;
         Cursor cursor = null;
@@ -200,19 +203,18 @@ public class StudentDao {
             int offset = pageSize * (pageindex - 1);
             data = new ArrayList<Student>();
             cursor = db.rawQuery("select * from student order by stuNo limit ?,?", new String[]{String.valueOf(offset), String.valueOf(pageSize)});
+            Log.i("aaa", cursor.toString());
             while (cursor.moveToNext()) {
-                Log.i("aaa","while执行了");
-                Student student = new Student();
+                Log.i("aaa", "while执行了");
+//                Student student = new Student();
                 int stuNo = cursor.getInt(cursor.getColumnIndex("stuNo"));
-                String name = cursor.getString(cursor.getColumnIndex("name"));
+                Log.i("aaa", stuNo + "^^^^^^^^^^^^^^^^^^^^^^^");
+                String name = cursor.getString(cursor.getColumnIndex("stuName"));
                 int age = cursor.getInt(cursor.getColumnIndex("age"));
                 String address = cursor.getString(cursor.getColumnIndex("address"));
                 double money = cursor.getDouble(cursor.getColumnIndex("money"));
-                student.setAddress(address);
-                student.setStuNo(stuNo);
-                student.setAge(age);
-                student.setName(name);
-                student.setMoney(money);
+                Student student = new Student(stuNo, name, address, money, age);
+                Log.i("aaa", student.toString() + "#########");
                 data.add(student);
             }
             return data;
@@ -225,8 +227,36 @@ public class StudentDao {
                 db.close();
             }
         }
-        Log.i("aaa","DAO_getAllStudentListByPage执行完全了");
+        Log.i("aaa", "DAO_getAllStudentListByPage执行完全了");
         return data;
+    }
+
+    public boolean studenTranferMoney(int fromstuNo, int tostuNo, double money) {
+
+        SQLiteDatabase db = null;
+        try {
+            db = helper.getReadableDatabase();
+            db.beginTransaction();
+            double balance = 0;
+            Cursor cursor = db.rawQuery("select money from student where stuNo =?", new String[]{fromstuNo + ""});
+            if (cursor.moveToNext()) {
+                balance = cursor.getDouble(0);
+            }
+            if (balance >= money) {
+                db.execSQL("update student set money=money-? where stuNo =?", new String[]{money + "", fromstuNo + ""});
+                db.execSQL("update student set money=money+? where stuNo =?", new String[]{money + "", tostuNo + ""});
+                db.setTransactionSuccessful();
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            db.endTransaction();
+            if (db.isOpen() && db != null)
+                db.close();
+        }
+
+
+        return false;
     }
 }
 

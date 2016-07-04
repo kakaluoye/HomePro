@@ -2,6 +2,7 @@ package com.lin.threelayersqlitemodal;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,10 +21,10 @@ public class AddStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
         studentService = new StudentService(this);
-        et_address = (EditText) this.findViewById(R.id.et_address);
-        et_age = (EditText) this.findViewById(R.id.et_age);
-        et_money = (EditText) this.findViewById(R.id.et_money);
-        et_name = (EditText) this.findViewById(R.id.et_name);
+        et_address = (EditText) this.findViewById(R.id.et_add_address);
+        et_age = (EditText) this.findViewById(R.id.et_add_age);
+        et_money = (EditText) this.findViewById(R.id.et_add_money);
+        et_name = (EditText) this.findViewById(R.id.et_add_name);
     }
 
     public void btn_add(View v) {

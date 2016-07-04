@@ -1,5 +1,6 @@
 package com.lin.threelayersqlitemodal;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,23 +14,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lin.threelayersqlitemodal.models.Student;
 import com.lin.threelayersqlitemodal.service.StudentService;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView lv;
-    private StudentAdapter adapter;
     private StudentService studentService;
     private List<Student> data;
-    private int pageSize = 15, pageIndex = 1;
+    private StudentAdapter adapter;
+    //    private List<HashMap<String,Object>> data;
+    private int pageSize = 15;
+    private int pageIndex = 1;
     private final int edititemid = 0x111, deleteitemid = 0x112;
     private int selectPostion = -1;
 
@@ -44,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
         data = studentService.getAllStudentListBypage(pageSize, pageIndex);
         adapter = new StudentAdapter(this, data);
         lv.setAdapter(adapter);
+
+        //试试别的方法    1
+//        data = studentService.getAllStudentmaplist();
+//        SimpleAdapter adapter = new SimpleAdapter(this,data,R.layout.item,new String[]{"stuNo","stuName","address","money","age"},new int[]{R.id.tv_item_stuNo,R.id.tv_item_name,R.id.tv_item_address,R.id.tv_item_money,R.id.tv_item_age});
+//        lv.setAdapter(adapter);
+        //试试别的方法    2
+//        Cursor cursor = studentService.getAllStudentCursor();
+//        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.item,cursor,new String[]{"_id","stuName","address","money","age"},new int[]{R.id.tv_item_stuNo,R.id.tv_item_name,R.id.tv_item_money,R.id.tv_item_age});
+//        lv.setAdapter(cursorAdapter);
         Log.i("aaa", "setAdapter执行完了");
         //还有两种方式，两种适配器填充。最后再添加！！！
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -68,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         registerForContextMenu(lv);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
     }
 
     public void updateListView() {
@@ -87,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         // TODO Auto-generated method stub
         super.onRestart();
+        updateListView();
+    }
+
+    public void btn_tranfermoney(View view) {
+        if (studentService.studentTranferMoney(2, 4, 100)) {
+            Toast.makeText(getApplicationContext(), "转账成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "转账失败", Toast.LENGTH_SHORT).show();
+        }
         updateListView();
     }
 
@@ -126,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 //创建对话框构建起对象，它就是整体，分3层，标题中间的，下面的按钮。
                 builder.setTitle("更新学生");
                 View view = View.inflate(this, R.layout.edit, null);
-                final TextView tv_stuNo = (EditText) view.findViewById(R.id.tv_ID);
+                final TextView tv_stuNo = (TextView) view.findViewById(R.id.tv_ID);
                 final EditText et_address = (EditText) view.findViewById(R.id.et_address);
                 final EditText et_name = (EditText) view.findViewById(R.id.et_name);
                 final EditText et_age = (EditText) view.findViewById(R.id.et_age);

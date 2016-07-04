@@ -22,6 +22,7 @@ public class StudentAdapter extends BaseAdapter {
         Log.i("aaa","StudentAdapter构造方法执行了");
         this.context = context;
         this.data = data;
+        Log.i("aaa",data.size()+"$###############");
     }
 
     @Override
@@ -49,11 +50,11 @@ public class StudentAdapter extends BaseAdapter {
         if (convertView == null) {//convertView    转变View，  ListView的每一个条目，用转换View对象来表示。
             convertView = View.inflate(context, R.layout.item, null);
             holder = new ViewHolder();
-            holder.tv_stuNo = (TextView) convertView.findViewById(R.id.tv_id);
-            holder.tv_address = (TextView) convertView.findViewById(R.id.tv_address);
-            holder.tv_age = (TextView) convertView.findViewById(R.id.tv_age);
-            holder.tv_money = (TextView) convertView.findViewById(R.id.tv_money);
-            holder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.tv_stuNo = (TextView) convertView.findViewById(R.id.tv_item_stuNo);
+            holder.tv_address = (TextView) convertView.findViewById(R.id.tv_item_address);
+            holder.tv_age = (TextView) convertView.findViewById(R.id.tv_item_age);
+            holder.tv_money = (TextView) convertView.findViewById(R.id.tv_item_money);
+            holder.tv_name = (TextView) convertView.findViewById(R.id.tv_item_name);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -64,9 +65,7 @@ public class StudentAdapter extends BaseAdapter {
         holder.tv_address.setText(student.getAddress());
         holder.tv_age.setText(student.getAge() + "");
         holder.tv_money.setText(student.getMoney() + "");
-        holder.tv_stuNo.setText("" + student.getStuNo());
-
-
+        holder.tv_stuNo.setText(student.getStuNo()+"");
         return convertView;
     }
 
